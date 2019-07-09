@@ -6,8 +6,9 @@ function setup() {
   size = 20;
   playArea = new PlayArea(20);
   playArea.createMap(size);
+  playArea.mapTiles[floor(random(playArea.mapTiles.length))].start = true;
   walkers = [];
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 1; i++) {
     walker = new RandomWalker(playArea.mapTiles[floor(random(playArea.mapTiles.length))], playArea.mapTiles);
     walkers.push(walker);
   }
@@ -49,11 +50,17 @@ class RandomWalker {
   }
 
   move() {
-    let next = this.getRandomNeighbor();
-    this.tile = next;
-    this.x = this.tile.x;
-    this.y = this.tile.y;
-    
+    let dir = createVector(this.tile.x - this.x, this.tile.y - this.y).normalize();
+    if (abs(this.x - this.tile.x) <= 1 && abs(this.y - this.tile.y) <= 1){
+      let next = this.getRandomNeighbor();
+      this.tile = next;
+      //let dir = createVector(this.tile.x - this.x, this.tile.y - this.y);
+      console.log('this happened');
+    } else {
+      this.x += dir.x;
+      this.y += dir.y;
+      console.log('this also happened');
+    }
   }
 
   show() {
@@ -72,6 +79,7 @@ class MapTile {
     this.gridPos = [tileX, tileY];
     this.w = sqrt(3) * size;
     this.h = 2 * size;
+    this.defend = false;
     this.highlight = false;
     this.hover = false;
     this.reachable = false;
@@ -92,7 +100,9 @@ class MapTile {
   show() {
     stroke(255);
     strokeWeight(2);
-    if (this.highlight) {
+    if (this.start) {
+      fill(0,255, 0);
+    } else if (this.highlight) {
       fill(51,204,153);
     } else if(this.hover) {
       fill(153);
