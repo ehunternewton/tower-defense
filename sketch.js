@@ -7,9 +7,12 @@ function setup() {
   playArea = new PlayArea(20);
   playArea.createMap(size);
   playArea.mapTiles[floor(random(playArea.mapTiles.length))].start = true;
+  playArea.createWalkMap();
+  
   walkers = [];
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 100; i++) {
     walker = new RandomWalker(playArea.mapTiles[floor(random(playArea.mapTiles.length))], playArea.mapTiles);
+    // walker = new RandomWalker(playArea.mapTiles[floor(playArea.mapTiles.length/2)], playArea.mapTiles);
     walkers.push(walker);
   }
   // walker = new RandomWalker(playArea.mapTiles[10], playArea.mapTiles);
@@ -32,34 +35,82 @@ class RandomWalker {
     this.y = mapTile.y;
   }
 
+  getLowestNeighbor() {
+    let cube_directions = [
+      [1, -1, 0], [1, 0, -1], [0, 1, -1],
+      [-1, 1, 0], [-1, 0, 1], [0, -1, 1]
+    ];
+    let nextTile = this.getRandomNeighbor();
+
+    for (let i = 0; i < cube_directions.length; i++) {
+      let direction = cube_directions[i];
+      let nextLocation = [this.tile.cubeX + direction[0], this.tile.cubeY + direction[1], this.tile.cubeZ + direction[2]]
+      let possibleNextTile = [this.tile.cubeX + direction[0], this.tile.cubeY + direction[1], this.tile.cubeZ + direction[2]];
+      for (let i = 0; i < this.mapTiles.length; i++) {
+        if (this.mapTiles[i].cubeX === nextLocation[0] && this.mapTiles[i].cubeY === nextLocation[1] && this.mapTiles[i].cubeZ === nextLocation[2]) {
+          if (this.mapTiles[i].reachable) {
+            let possibleNextTile =  this.mapTiles[i];
+            if (possibleNextTile.value < nextTile.value) {
+              nextTile = possibleNextTile;
+            }
+          }
+        }
+      }
+    }
+    if (nextTile.reachable) {
+      return nextTile;
+    } else {
+      return this.tile;
+    }
+  }
+
+  getNeighbors() {
+    let neighbors = [];
+    let cube_directions = [
+      [1, -1, 0], [1, 0, -1], [0, 1, -1],
+      [-1, 1, 0], [-1, 0, 1], [0, -1, 1]
+    ];
+    for (let i = 0; i < 6; i++) {
+      console.log(i);
+      let direction = cube_directions[i];
+      let nextLocation = [this.tile.cubeX + direction[0], this.tile.cubeY + direction[1], this.tile.cubeZ + direction[2]]
+      let nextLocationTile = [this.tile.cubeX + direction[0], this.tile.cubeY + direction[1], this.tile.cubeZ + direction[2]];
+      //console.log(nextLocationTile);
+      neighbors[i] = (nextLocationTile);
+    }
+    //console.log(neighbors);
+    return neighbors;
+  }
+
   getRandomNeighbor() {
     let cube_directions = [
-      [1, -1, 0], [1, 0, -1], [0, 1, -1], 
+      [1, -1, 0], [1, 0, -1], [0, 1, -1],
       [-1, 1, 0], [-1, 0, 1], [0, -1, 1]
-    ]
+    ];
     let direction = cube_directions[floor(random(cube_directions.length))];
     let nextLocation = [this.tile.cubeX + direction[0], this.tile.cubeY + direction[1], this.tile.cubeZ + direction[2]]
     for (let i = 0; i < this.mapTiles.length; i++) {
       if (this.mapTiles[i].cubeX === nextLocation[0] && this.mapTiles[i].cubeY === nextLocation[1] && this.mapTiles[i].cubeZ === nextLocation[2]) {
         if (this.mapTiles[i].reachable) {
           return this.mapTiles[i];
-        } 
+        }
       }
     }
     return this.tile;
   }
 
   move() {
+    let speed = 3;
     let dir = createVector(this.tile.x - this.x, this.tile.y - this.y).normalize();
-    if (abs(this.x - this.tile.x) <= 1 && abs(this.y - this.tile.y) <= 1){
-      let next = this.getRandomNeighbor();
+    if (abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed){
+      let next = this.getLowestNeighbor();
       this.tile = next;
       //let dir = createVector(this.tile.x - this.x, this.tile.y - this.y);
-      console.log('this happened');
+      //console.log('this happened');
     } else {
-      this.x += dir.x;
-      this.y += dir.y;
-      console.log('this also happened');
+      this.x += dir.x * speed;
+      this.y += dir.y * speed;
+      //console.log('this also happened');
     }
   }
 
@@ -68,18 +119,19 @@ class RandomWalker {
     fill(255);
     ellipse(this.x, this.y, 16, 16);
   }
-  
+
 }
 
 
 class MapTile {
   constructor(x, y, size, tileX, tileY) {
+    this.value = 0;
     this.x = x;
     this.y = y;
     this.gridPos = [tileX, tileY];
     this.w = sqrt(3) * size;
     this.h = 2 * size;
-    this.defend = false;
+    this.start = false;
     this.highlight = false;
     this.hover = false;
     this.reachable = false;
@@ -96,7 +148,7 @@ class MapTile {
   get cubeY() {
     return -this.cubeX - this.cubeZ;
   }
-  
+
   show() {
     stroke(255);
     strokeWeight(2);
@@ -109,23 +161,28 @@ class MapTile {
     }else {
       fill(204);
     }
-    push();
-      translate(this.x, this.y);
+    drawMapTile(this.x, this.y, this.w, this.h, this.value, this.gridPos[0], this.gridPos[1]);
+  }
+}
+
+function drawMapTile(x, y, w, h, value, gridX, gridY) {
+  push();
+      translate(x, y);
       beginShape();
-      vertex(0, -this.h / 2);
-      vertex(this.w / 2, -this.h / 4);
-      vertex(this.w / 2, this.h / 4);
-      vertex(0 , this.h / 2);
-      vertex(-this.w / 2, this.h / 4);
-      vertex(-this.w / 2, -this.h / 4);
+      vertex(0, -h / 2);
+      vertex(w / 2, -h / 4);
+      vertex(w / 2, h / 4);
+      vertex(0 , h / 2);
+      vertex(-w / 2, h / 4);
+      vertex(-w / 2, -h / 4);
       endShape(CLOSE);
-        // textSize(10);
-        // textAlign(CENTER);
-        // fill(51);
-        // text(this.gridPos[0] + ", " + this.gridPos[1], -15, 0);
+        textSize(10);
+        textAlign(CENTER);
+        fill(51);
+        // text(value, 0,0);
+        text(gridX + ", " + gridY, -15, 0);
         // text(this.cubeX + "   " + this.cubeZ + "\n" + this.cubeY, 0, 0);
 	  pop();
-  }
 }
 
 class PlayArea {
@@ -143,7 +200,7 @@ class PlayArea {
           for (let i = 0; i < tilesWide; i++) {
             let centerX = i * w;
             let centerY = j * 3 * h / 4;
-            if (centerX - w >= 0 && centerX + w < canvasWidth && 
+            if (centerX - w >= 0 && centerX + w < canvasWidth &&
                 centerY - h / 2 >= 0 && centerY + h/2 < canvasHeight) {
               if(j % 2 == 0) {
                 let mt = new MapTile(centerX + w / 2, centerY, size, i, j);
@@ -155,16 +212,34 @@ class PlayArea {
                 this.mapTiles.push(mt);
               }
             }
-            
+
           }
         }
+      }
+
+      createWalkMap() {
+        for (let i = 0; i < playArea.mapTiles.length; i++) {
+          playArea.mapTiles[i].value = i;
+        }
+        let base = playArea.mapTiles[0];
+       
+        for (let i = 0; i < playArea.mapTiles.length; i++) {
+          if (playArea.mapTiles[i].start == true) {
+            base = playArea.mapTiles[i];
+          }
+        }
+        //console.log(base);
+        base.value = 0;
+        let n = base.getNeighbors;
+
+        console.log(n);
       }
 
       show() {
       for (let i = 0; i < this.mapTiles.length; i++) {
         this.mapTiles[i].show();
       }
-    } 
+    }
 
     mouseOver() {
         for (let i = 0; i < this.mapTiles.length; i++) {
@@ -197,7 +272,7 @@ function mouseClicked() {
         tile.highlight = false;
         tile.reachable = true;
       }
-      // console.log("grid coordinates: (" + tile.gridPos[0] + ", " + tile.gridPos[1] + ")" + "\n" + 
+      // console.log("grid coordinates: (" + tile.gridPos[0] + ", " + tile.gridPos[1] + ")" + "\n" +
       // 'cube coordinates: (' + tile.cubeX + ', ' + tile.cubeY + ', ' + tile.cubeZ + ')');
     }
   }
