@@ -78,7 +78,7 @@ class RandomWalker {
       //console.log(nextLocationTile);
       neighbors[i] = (nextLocationTile);
     }
-    //console.log(neighbors);
+    console.log(neighbors);
     return neighbors;
   }
 
@@ -104,6 +104,7 @@ class RandomWalker {
     let dir = createVector(this.tile.x - this.x, this.tile.y - this.y).normalize();
     if (abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed){
       let next = this.getLowestNeighbor();
+      //console.log(next);
       this.tile = next;
       //let dir = createVector(this.tile.x - this.x, this.tile.y - this.y);
       //console.log('this happened');
@@ -147,6 +148,24 @@ class MapTile {
 
   get cubeY() {
     return -this.cubeX - this.cubeZ;
+  }
+
+  get neighbors() {
+    let neighbors = [];
+    let cube_directions = [
+      [1, -1, 0], [1, 0, -1], [0, 1, -1],
+      [-1, 1, 0], [-1, 0, 1], [0, -1, 1]
+    ];
+    for (let i = 0; i < 6; i++) {
+      console.log(i);
+      let direction = cube_directions[i];
+      let nextLocation = [this.cubeX + direction[0], this.cubeY + direction[1], this.cubeZ + direction[2]]
+      let nextLocationTile = [this.cubeX + direction[0], this.cubeY + direction[1], this.cubeZ + direction[2]];
+      //console.log(nextLocationTile);
+      neighbors[i] = (nextLocationTile);
+    }
+    console.log(neighbors);
+    return neighbors;
   }
 
   show() {
@@ -230,9 +249,20 @@ class PlayArea {
         }
         //console.log(base);
         base.value = 0;
-        let n = base.getNeighbors;
-
-        console.log(n);
+        // let n = base.neighbors;
+        // console.log(n[0]);
+        let frontier = [];
+        frontier.push(base);
+        while (frontier.length != 0) {
+          let current = frontier.shift();
+          for (let i = 0; i < current.neighbors; i++) {
+            let next = current.neighbors[i];
+            if (!current.neighbors.includes(next)) {
+              frontier.push(next);
+              next.value = current.value + 1;
+            }
+          }
+        }
       }
 
       show() {
