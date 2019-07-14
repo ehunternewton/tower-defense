@@ -28,36 +28,42 @@ class PlayArea {
 
           }
         }
+        for (let i = 0; i < this.mapTiles.length; i++) {
+          this.mapTiles[i].mapTiles = this.mapTiles;
+        }
       }
 
-      // createWalkMap() {
-      //   for (let i = 0; i < playArea.mapTiles.length; i++) {
-      //     playArea.mapTiles[i].value = i;
-      //   }
-      //   let base = playArea.mapTiles[0];
+      createWalkMap() {
+        console.log('creating walk map');
+        for (let i = 0; i < playArea.mapTiles.length; i++) {
+          playArea.mapTiles[i].value = null;
+        }
+        let base = playArea.mapTiles[0];
        
-      //   for (let i = 0; i < playArea.mapTiles.length; i++) {
-      //     if (playArea.mapTiles[i].start == true) {
-      //       base = playArea.mapTiles[i];
-      //     }
-      //   }
-      //   //console.log(base);
-      //   base.value = 0;
-      //   // let n = base.neighbors;
-      //   // console.log(n[0]);
-      //   let frontier = [];
-      //   frontier.push(base);
-      //   while (frontier.length != 0) {
-      //     let current = frontier.shift();
-      //     for (let i = 0; i < current.neighbors; i++) {
-      //       let next = current.neighbors[i];
-      //       if (!current.neighbors.includes(next)) {
-      //         frontier.push(next);
-      //         next.value = current.value + 1;
-      //       }
-      //     }
-      //   }
-      // }
+        for (let i = 0; i < playArea.mapTiles.length; i++) {
+          if (playArea.mapTiles[i].start == true) {
+            base = playArea.mapTiles[i];
+          }
+        }
+        // console.log(base);
+        base.value = 0;
+        // let n = base.neighbors;
+        // console.log(n[0]);
+        let frontier = [];
+        frontier.push(base);
+        while (frontier.length != 0) {
+          let current = frontier.shift();
+          for (let i = 0; i < current.neighbors.length; i++) {
+            console.log('made it!');
+            let next = current.neighbors[i];
+            if (next.value == null && next.reachable) {
+              next.value = current.value + 1;
+              frontier.push(next);
+            }
+          }
+        }
+      }
+      
 
       show() {
       for (let i = 0; i < this.mapTiles.length; i++) {

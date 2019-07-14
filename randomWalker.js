@@ -21,6 +21,7 @@ class RandomWalker {
           if (this.mapTiles[i].cubeX === nextLocation[0] && this.mapTiles[i].cubeY === nextLocation[1] && this.mapTiles[i].cubeZ === nextLocation[2]) {
             if (this.mapTiles[i].reachable) {
               let possibleNextTile =  this.mapTiles[i];
+              
               if (possibleNextTile.value < nextTile.value) {
                 nextTile = possibleNextTile;
               }

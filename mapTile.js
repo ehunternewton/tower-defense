@@ -1,7 +1,8 @@
 
 class MapTile {
     constructor(x, y, size, tileX, tileY) {
-      this.value = 0;
+      this.mapTiles = null;
+      this.value = null;
       this.x = x;
       this.y = y;
       this.gridPos = [tileX, tileY];
@@ -34,11 +35,15 @@ class MapTile {
       for (let i = 0; i < 6; i++) {
         let direction = cube_directions[i];
         let nextLocation = [this.cubeX + direction[0], this.cubeY + direction[1], this.cubeZ + direction[2]];
-        let nextLocationTile = [this.cubeX + direction[0], this.cubeY + direction[1], this.cubeZ + direction[2]];
-        //console.log(nextLocationTile);
-        neighbors[i] = (nextLocationTile);
+        for (let i = 0; i < this.mapTiles.length; i++) {
+          if (this.mapTiles[i].cubeX === nextLocation[0] && this.mapTiles[i].cubeY === nextLocation[1] && this.mapTiles[i].cubeZ === nextLocation[2]) {
+            if (this.mapTiles[i].reachable) {
+              neighbors.push(this.mapTiles[i]);
+            }
+          }
+        }
       }
-      console.log(neighbors);
+      // console.log(neighbors);
       return neighbors;
     }
   
@@ -74,6 +79,6 @@ class MapTile {
           fill(51);
           // text(value, 0,0);
           //text(gridX + ", " + gridY, -15, 0);
-        text(cubeX + "   " + cubeZ + "\n" + cubeY, 0, 0);
+          // text(cubeX + "   " + cubeZ + "\n" + cubeY, 0, 0);
         pop();
   }
