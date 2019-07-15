@@ -82,6 +82,9 @@ class RandomWalker {
       if (abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed){
         let next = this.getLowestNeighbor();
         //console.log(next);
+        // if (next.value > this.tile.value){
+        //   return;
+        // }
         this.tile = next;
         //let dir = createVector(this.tile.x - this.x, this.tile.y - this.y);
         //console.log('this happened');

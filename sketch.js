@@ -10,14 +10,19 @@ function setup() {
   size = 20;
   playArea = new PlayArea(20);
   playArea.createMap(size);
-  playArea.mapTiles[floor(random(playArea.mapTiles.length))].start = true;
+  let start = playArea.mapTiles[floor(random(playArea.mapTiles.length))];
+  // let start = playArea.mapTiles[346];
+  start.start = true;
+  let spawnPoint = playArea.mapTiles[floor(random(playArea.mapTiles.length))];
+  // let end = playArea.mapTiles[22]
+  spawnPoint.spawnPoint = true;
   playArea.createWalkMap();
   //createDistanceMap(playArea);
   
   walkers = [];
-  for (let i = 0; i < 100; i++) {
-    walker = new RandomWalker(playArea.mapTiles[floor(random(playArea.mapTiles.length))], playArea.mapTiles);
-    // walker = new RandomWalker(playArea.mapTiles[floor(playArea.mapTiles.length/2)], playArea.mapTiles);
+  for (let i = 0; i < 10; i++) {
+    // walker = new RandomWalker(playArea.mapTiles[floor(random(playArea.mapTiles.length))], playArea.mapTiles);
+    walker = new RandomWalker(spawnPoint, playArea.mapTiles);
     walkers.push(walker);
   }
   // walker = new RandomWalker(playArea.mapTiles[10], playArea.mapTiles);

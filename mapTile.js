@@ -9,6 +9,7 @@ class MapTile {
       this.w = sqrt(3) * size;
       this.h = 2 * size;
       this.start = false;
+      this.spawnPoint = false;
       this.highlight = false;
       this.hover = false;
       this.reachable = false;
@@ -52,7 +53,10 @@ class MapTile {
       strokeWeight(2);
       if (this.start) {
         fill(0,255, 0);
-      } else if (this.highlight) {
+      } else if (this.spawnPoint) {
+        fill(255,0,0);
+      }
+      else if (this.highlight) {
         fill(51,204,153);
       } else if(this.hover) {
         fill(153);
