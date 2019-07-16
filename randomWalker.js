@@ -4,6 +4,7 @@ class RandomWalker {
       this.mapTiles = mapTiles;
       this.x = mapTile.x;
       this.y = mapTile.y;
+      this.dead = false;
     }
   
     getLowestNeighbor() {
@@ -78,6 +79,9 @@ class RandomWalker {
   
     move() {
       let speed = 1;
+      if (this.tile.start == true && abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed) {
+        this.dead = true;
+      }
       let dir = createVector(this.tile.x - this.x, this.tile.y - this.y).normalize();
       if (abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed){
         let next = this.getLowestNeighbor();

@@ -13,6 +13,7 @@ class MapTile {
       this.highlight = false;
       this.hover = false;
       this.reachable = false;
+      this.hasTower = false;
     }
   
     get cubeX() {
@@ -81,7 +82,9 @@ class MapTile {
           textSize(10);
           textAlign(CENTER);
           fill(51);
-          // text(value, 0,0);
+          if (value != null) {
+            text(value, 0,0);
+          }
           //text(gridX + ", " + gridY, -15, 0);
           // text(cubeX + "   " + cubeZ + "\n" + cubeY, 0, 0);
         pop();

@@ -73,7 +73,7 @@ class PlayArea {
 
     mouseOver() {
         for (let i = 0; i < this.mapTiles.length; i++) {
-            let radius = this.size*sqrt(3)/2 - 2;
+            let radius = this.size*sqrt(3) - 4;
             if (
                 mouseX >= this.mapTiles[i].x - radius &&
                 mouseX <= this.mapTiles[i].x + radius &&
