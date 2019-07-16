@@ -50,7 +50,7 @@ class MapTile {
     }
   
     show() {
-      stroke(255);
+      stroke(233);
       strokeWeight(2);
       if (this.start) {
         fill(0,255, 0);
