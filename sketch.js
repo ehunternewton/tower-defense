@@ -1,5 +1,5 @@
 let count = 0;
-let delay = 100;
+let delay = 150;
 let towers = [];
 const size = 40;
 playArea = new PlayArea(size/2);
@@ -38,14 +38,19 @@ function draw() {
   playArea.mouseOver();
   playArea.show();
   for (let i = 0; i < towers.length; i++) {
+    // TODO:
+    towers[i].target(walkers);
+    towers[i].update();
     towers[i].show()
   }
   for (let i = 0; i < walkers.length; i++) {
     if (walkers[i].dead == true) {
       walkers.splice(i, 1);
     }
-    walkers[i].move();
-    walkers[i].show();
+    if (walkers.length > 0) {
+      walkers[i].move();
+      walkers[i].show();
+    }
   }
 }
 

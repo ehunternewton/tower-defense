@@ -52,7 +52,6 @@ class PlayArea {
         while (frontier.length != 0) {
           let current = frontier.shift();
           for (let i = 0; i < current.neighbors.length; i++) {
-            console.log('made it!');
             let next = current.neighbors[i];
             if (next.value == null && next.reachable) {
               next.value = current.value + 1;
