@@ -72,12 +72,13 @@ function mouseClicked() {
   }
   playArea.createWalkMap();
   for (let i = 0; i < walkers.length; i++) {
-    if (walkers[i].tile.value == null || playArea.mapTiles[16].value == null) {
+    if (walkers[i].tile.value === null || playArea.mapTiles[16].value === null || tile.value === 0) {
       towers.pop();
       tile.hasTower = false;
       tile.highlight = false;
       tile.reachable = true;
       playArea.createWalkMap();
+      break;
     }
   }
 }
