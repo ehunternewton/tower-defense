@@ -101,8 +101,8 @@ class RandomWalker {
   
     show() {
       stroke(51);
-      fill(255);
-      ellipse(this.x, this.y, 16, 16);
+      fill(244);
+      ellipse(this.x, this.y, 24, 24);
     }
   
   }
