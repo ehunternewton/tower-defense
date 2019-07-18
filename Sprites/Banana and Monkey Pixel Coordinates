@@ -1,0 +1,12 @@
+Monkey:
+
+pixil-frame-0 - x:1 y: 1
+pixil-frame-1 - x:73 y:1
+pixil-frame-2 - x:1 y:83
+
+Banana:
+
+pixil-frame-0 x:1 y:1
+pixil-frame-1 x: 73 y:1
+pixil-frame-2 x:145 y:1
+pixil-frame-3 x :1 y:83
