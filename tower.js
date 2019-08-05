@@ -12,13 +12,24 @@ class Tower {
         this.angle = 0;
     }
 
+    // show() {
+    //     fill(0,0,255);  
+    //     ellipse(this.x , this.y, 40, 40);
+    //     // fill(0);
+    //     // rect(0,-2,30,4);
+    //     let img = spritesheet.get(0,0,65,75);
+    //     image(img,this.x-30,this.y-35);
+    //     this.follow = true;
+    // }
+
     show() {
-        fill(0,0,255);  
-        ellipse(this.x , this.y, 40, 40);
-        // fill(0);
-        // rect(0,-2,30,4);
-        let img = spritesheet.get(0,0,65,75);
-        image(img,this.x-30,this.y-35);
+        push();
+            translate(this.x, this.y);
+            rotate(this.angle);
+            fill(0,0,255);  
+            ellipse(0, 0, 40, 40);
+            rect(0,0,10,20);
+        pop();
     }
 
     aim(x, y) {
@@ -42,11 +53,11 @@ class Tower {
         this.attack(e);
         // Draw line to target
         // if (!this.drawLine) return;
-        stroke(200,200,0);
-        strokeWeight(3);
-        line(this.x, this.y, e.x, e.y);
-        strokeWeight(1);
-        stroke(244);    
+        // stroke(200,200,0);
+        // strokeWeight(3);
+        // line(this.x, this.y, e.x, e.y);
+        // strokeWeight(1);
+        // stroke(244);    
     }
 
     target(entities) {

@@ -5,7 +5,7 @@ class RandomWalker {
       this.x = mapTile.x;
       this.y = mapTile.y;
       this.dead = false;
-      this.health = 300;
+      this.health = 30000;
     }
 
     getLowestNeighbors() {
@@ -30,36 +30,6 @@ class RandomWalker {
       if (this.health > 0) this.health -= amt;
       // if (this.health <= 0) this.dead = true;
   }
-  
-      // getLowestNeighbor() {
-      //   let cube_directions = [
-      //     [1, -1, 0], [1, 0, -1], [0, 1, -1],
-      //     [-1, 1, 0], [-1, 0, 1], [0, -1, 1]
-      //   ];
-      //   let nextTile = this.getRandomNeighbor();
-    
-      //   for (let i = 0; i < cube_directions.length; i++) {
-      //     let direction = cube_directions[i];
-      //     let nextLocation = [this.tile.cubeX + direction[0], this.tile.cubeY + direction[1], this.tile.cubeZ + direction[2]]
-      //     let possibleNextTile = [this.tile.cubeX + direction[0], this.tile.cubeY + direction[1], this.tile.cubeZ + direction[2]];
-      //     for (let i = 0; i < this.mapTiles.length; i++) {
-      //       if (this.mapTiles[i].cubeX === nextLocation[0] && this.mapTiles[i].cubeY === nextLocation[1] && this.mapTiles[i].cubeZ === nextLocation[2]) {
-      //         if (this.mapTiles[i].reachable) {
-      //           let possibleNextTile =  this.mapTiles[i];
-                
-      //           if (possibleNextTile.value < nextTile.value) {
-      //             nextTile = possibleNextTile;
-      //           }
-      //         }
-      //       }
-      //     }
-      //   }
-      //   if (nextTile.reachable) {
-      //     return nextTile;
-      //   } else {
-      //     return this.tile;
-      //   }
-      // }
   
     getNeighbors() {
       let neighbors = [];
@@ -121,7 +91,7 @@ class RandomWalker {
     show() {
       stroke(51);
       fill(244);
-      ellipse(this.x, this.y, 24, 24);
+      ellipse(this.x, this.y, 32, 32);
       fill(255,0,0);
       textSize(10);
       textAlign(CENTER);

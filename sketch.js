@@ -1,5 +1,5 @@
 let count = 0;
-let delay = 150;
+let delay = 100;
 let towers = [];
 const size = 40;
 playArea = new PlayArea(size/2);
@@ -25,9 +25,7 @@ function setup() {
   let spawnPoint = playArea.mapTiles[16]
   spawnPoint.spawnPoint = true;
   playArea.createWalkMap();
-  // playArea.mapTiles = playArea.createWalkMap();
   
-  // walkers = [];
   for (let i = 0; i < 1; i++) {
     walker = new RandomWalker(spawnPoint, playArea.mapTiles);
     walkers.push(walker);
@@ -84,8 +82,15 @@ function mouseClicked() {
     }
   }
   playArea.createWalkMap();
+  if(playArea.mapTiles[16].value == null) {
+    towers.pop();
+    tile.hasTower = false;
+    tile.highlight = false;
+    tile.reachable = true;
+    playArea.createWalkMap();
+  } else {
   for (let i = 0; i < walkers.length; i++) {
-    if (walkers[i].tile.value === null || playArea.mapTiles[16].value === null || tile.value === 0) {
+    if (walkers[i].tile.value === null) {
       towers.pop();
       tile.hasTower = false;
       tile.highlight = false;
@@ -94,6 +99,8 @@ function mouseClicked() {
       break;
     }
   }
+} 
+  //  playArea.mapTiles[16].value === null || tile.value === 0
 }
 
 function getTile(x, y) {
