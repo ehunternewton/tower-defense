@@ -4,14 +4,16 @@ let towers = [];
 const size = 40;
 playArea = new PlayArea(size/2);
 let walkers = [];
+let bananas = [];
 let spritesheet;
-// let spritedata;
+let bananasprite;
 let toPlace;
 let toSell;
 
 function preload() {
   // spritedata = loadJSON("banana.json");
   spritesheet = loadImage("Sprites/MonkeySprite.png");
+  bananasprite = loadImage("Sprites/BananaSprite.png");
   // spritesheet = spritesheet.get(0,0,40,40);
 }
 
@@ -47,12 +49,25 @@ function draw() {
   
   playArea.mouseOver();
   playArea.show();
+
+  
+  
   for (let i = 0; i < towers.length; i++) {
-    // TODO:
     towers[i].target(walkers);
     towers[i].update();
     towers[i].show()
   }
+
+
+  for (let i = 0; i < bananas.length; i++) {
+    if (bananas[i].dead || bananas[i].target.dead) {
+      bananas.splice(i, 1);
+    } else {
+      bananas[i].update();
+      bananas[i].show();
+    }
+  }
+
   for (let i = 0; i < walkers.length; i++) {
     if (walkers[i].dead == true) {
       walkers.splice(i, 1);
@@ -62,6 +77,7 @@ function draw() {
       walkers[i].show();
     }
   }
+  
 }
 
 function mouseClicked() {

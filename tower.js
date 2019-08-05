@@ -2,11 +2,11 @@ class Tower {
     constructor(mapTile) {
         this.mapTile = mapTile;
         this.x = this.mapTile.x;
-        this.y = this.mapTile.  y;
-        this.range = 3*size;
+        this.y = this.mapTile.y;
+        this.range = 6*size;
         this.cd = 0;
-        this.cooldownMin = 20;
-        this.cooldownMax = 50;
+        this.cooldownMin = 60;
+        this.cooldownMax = 120;
         this.damageMin = 5;
         this.damageMax = 15;
         this.angle = 0;
@@ -40,15 +40,14 @@ class Tower {
 
     attack(e) {
         var damage = round(random(this.damageMin, this.damageMax));
-        e.dealDamage(damage);
-        // if (!muteSounds && sounds.hasOwnProperty(this.sound)) {
-        //     sounds[this.sound].play();
-        // }
-        // this.onHit(e);
+        // e.dealDamage(damage);
+        let b = new Banana(this.x, this.y, e, damage);
+        // console.log(b);
+        bananas.push(b);
     }
 
     onAim(e) {
-        if (this.canFire()) this.aim(e.x, e.y);
+        this.aim(e.x, e.y);
         // if (stopFiring) return;
         if (!this.canFire()) return;
         this.resetCooldown();

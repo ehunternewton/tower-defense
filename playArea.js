@@ -113,7 +113,7 @@ class PlayArea {
         if (this.mapTiles[i].hover) {
           stroke(255);
           fill('rgba(255,255,255, 0)');
-          ellipse(this.mapTiles[i].x, this.mapTiles[i].y, 240,240);
+          ellipse(this.mapTiles[i].x, this.mapTiles[i].y, 480,480);
         }
       }
     }
