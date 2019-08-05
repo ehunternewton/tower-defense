@@ -9,11 +9,17 @@ class Tower {
         this.cooldownMax = 50;
         this.damageMin = 10;
         this.damageMax = 50;
+        this.follow = true;
     }
 
     show() {
-        fill(0,0,255);  
-        ellipse(this.x , this.y, 40, 40);
+        push();
+            translate(this.x, this.y);
+            rotate(this.angle);
+            fill(0,0,255);  
+            ellipse(0, 0, 40, 40);
+            rect(0,0,10,20);
+        pop();
     }
 
     aim(x, y) {
@@ -37,11 +43,11 @@ class Tower {
         this.attack(e);
         // Draw line to target
         // if (!this.drawLine) return;
-        stroke(200,200,0);
-        strokeWeight(3);
-        line(this.x, this.y, e.x, e.y);
-        strokeWeight(1);
-        stroke(244);    
+        // stroke(200,200,0);
+        // strokeWeight(3);
+        // line(this.x, this.y, e.x, e.y);
+        // strokeWeight(1);
+        // stroke(244);    
     }
 
     target(entities) {
