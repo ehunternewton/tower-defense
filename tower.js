@@ -9,11 +9,16 @@ class Tower {
         this.cooldownMax = 50;
         this.damageMin = 10;
         this.damageMax = 50;
+        this.angle = 0;
     }
 
     show() {
         fill(0,0,255);  
         ellipse(this.x , this.y, 40, 40);
+        // fill(0);
+        // rect(0,-2,30,4);
+        let img = spritesheet.get(0,0,65,75);
+        image(img,this.x-30,this.y-35);
     }
 
     aim(x, y) {
@@ -30,7 +35,7 @@ class Tower {
     }
 
     onAim(e) {
-        if (this.canFire() || this.follow) this.aim(e.x, e.y);
+        if (this.canFire()) this.aim(e.x, e.y);
         // if (stopFiring) return;
         if (!this.canFire()) return;
         this.resetCooldown();

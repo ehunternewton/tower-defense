@@ -4,6 +4,14 @@ let towers = [];
 const size = 40;
 playArea = new PlayArea(size/2);
 let walkers = [];
+let spritesheet;
+// let spritedata;
+
+function preload() {
+  // spritedata = loadJSON("banana.json");
+  spritesheet = loadImage("Sprites/MonkeySprite.png");
+  // spritesheet = spritesheet.get(0,0,40,40);
+}
 
 function setup() {
   canvasWidth = 1280;
