@@ -61,7 +61,7 @@ class MapTile {
         fill(51,204,153);
       } else if(this.hover) {
         fill(153);
-      }else {
+      } else {
         fill(204);
       }
       drawMapTile(this.x, this.y, this.w, this.h, this.value, this.gridPos[0], this.gridPos[1], this.cubeX, this.cubeY, this.cubeZ);
@@ -82,9 +82,9 @@ class MapTile {
           textSize(10);
           textAlign(CENTER);
           fill(51);
-          if (value != null) {
-            text(value, 0,0);
-          }
+          // if (value != null) {
+          //   text(value, 0,0);
+          // }
           //text(gridX + ", " + gridY, -15, 0);
           // text(cubeX + "   " + cubeZ + "\n" + cubeY, 0, 0);
         pop();

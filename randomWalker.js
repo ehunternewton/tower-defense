@@ -5,7 +5,7 @@ class RandomWalker {
       this.x = mapTile.x;
       this.y = mapTile.y;
       this.dead = false;
-      this.health = 30000;
+      this.health = 300;
     }
 
     getLowestNeighbors() {

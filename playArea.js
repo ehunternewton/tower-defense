@@ -109,21 +109,40 @@ class PlayArea {
       for (let i = 0; i < this.mapTiles.length; i++) {
         this.mapTiles[i].show();
       }
+      for (let i = 0; i < this.mapTiles.length; i++) {
+        if (this.mapTiles[i].hover) {
+          stroke(255);
+          fill('rgba(255,255,255, 0)');
+          ellipse(this.mapTiles[i].x, this.mapTiles[i].y, 240,240);
+        }
+      }
     }
 
     mouseOver() {
         for (let i = 0; i < this.mapTiles.length; i++) {
-            let radius = this.size*sqrt(3) - 4;
+            let radius = this.size*sqrt(3) - 6;
             if (
                 mouseX >= this.mapTiles[i].x - radius &&
                 mouseX <= this.mapTiles[i].x + radius &&
                 mouseY >= this.mapTiles[i].y - radius &&
-                mouseY <= this.mapTiles[i].y + radius
+                mouseY <= this.mapTiles[i].y + radius &&
+                toPlace
             ) {
                 this.mapTiles[i].hover = true;
             } else {
                 this.mapTiles[i].hover = false;
             }
+            if (
+              mouseX >= this.mapTiles[i].x - radius &&
+              mouseX <= this.mapTiles[i].x + radius &&
+              mouseY >= this.mapTiles[i].y - radius &&
+              mouseY <= this.mapTiles[i].y + radius &&
+              toSell && this.mapTiles[i].hasTower
+          ) {
+            this.mapTiles[i].highlight = true;
+          } else {
+            this.mapTiles[i].highlight = false;
+          }
         }
     }
 

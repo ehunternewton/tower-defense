@@ -3,12 +3,12 @@ class Tower {
         this.mapTile = mapTile;
         this.x = this.mapTile.x;
         this.y = this.mapTile.  y;
-        this.range = 120;
+        this.range = 3*size;
         this.cd = 0;
         this.cooldownMin = 20;
         this.cooldownMax = 50;
-        this.damageMin = 10;
-        this.damageMax = 50;
+        this.damageMin = 5;
+        this.damageMax = 15;
         this.angle = 0;
     }
 
@@ -27,8 +27,10 @@ class Tower {
             translate(this.x, this.y);
             rotate(this.angle);
             fill(0,0,255);  
-            ellipse(0, 0, 40, 40);
-            rect(0,0,10,20);
+            // ellipse(0, 0, 40, 40);
+            // rect(0,-3,30,3);
+            let img = spritesheet.get(0,0,65,75);
+            image(img,-30,-35);
         pop();
     }
 
@@ -51,6 +53,7 @@ class Tower {
         if (!this.canFire()) return;
         this.resetCooldown();
         this.attack(e);
+        this.throwBanana(e);
         // Draw line to target
         // if (!this.drawLine) return;
         // stroke(200,200,0);
@@ -58,6 +61,13 @@ class Tower {
         // line(this.x, this.y, e.x, e.y);
         // strokeWeight(1);
         // stroke(244);    
+    }
+
+    throwBanana(e) {
+        let dir = createVector(this.x, this.y, e.x, e.y);
+        // stroke(0);
+        // strokeWeight(10);
+        // line(this.x, this.y, dir.x, dir.y);
     }
 
     target(entities) {
