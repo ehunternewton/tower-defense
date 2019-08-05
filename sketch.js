@@ -9,6 +9,7 @@ let spritesheet;
 let bananasprite;
 let toPlace;
 let toSell;
+let cash = 100; 
 
 function preload() {
   // spritedata = loadJSON("banana.json");
@@ -71,24 +72,34 @@ function draw() {
   for (let i = 0; i < walkers.length; i++) {
     if (walkers[i].dead == true) {
       walkers.splice(i, 1);
+      cash += 10;
+      console.log("enemy killed! cash: $" + cash);
     }
     if (walkers.length > 0) {
       walkers[i].move();
       walkers[i].show();
     }
   }
-  
+fill(255);
+stroke(0);
+textSize(23);
+text("Cash: $"+cash,canvasWidth/2,canvasHeight);
+
 }
 
 function mouseClicked() {
   let tile = getTile(mouseX, mouseY);
-  if(toPlace && !tile.hasTower){
+  if(toPlace && !tile.hasTower && cash >= 25){
     placeTower(tile);
     toPlace = false;
+    cash -= 25;
+    console.log("tower bought! cash: $" + cash);
   } 
   if (toSell && tile.hasTower) {
     sellTower(tile);
     toSell = false;
+    cash += 15;
+    console.log("tower sold! cash: $" + cash)
   }
 }
 

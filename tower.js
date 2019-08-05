@@ -10,6 +10,7 @@ class Tower {
         this.damageMin = 5;
         this.damageMax = 15;
         this.angle = 0;
+        this.cost = 25;
     }
 
     // show() {
