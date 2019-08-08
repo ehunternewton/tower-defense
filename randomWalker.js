@@ -5,6 +5,7 @@ class RandomWalker {
       this.x = mapTile.x;
       this.y = mapTile.y;
       this.dead = false;
+      this.reachedGoal = false;
       this.health = health;
     }
 
@@ -71,7 +72,7 @@ class RandomWalker {
     move() {
       let speed = 1;
       if (this.tile.start == true && abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed) {
-        this.dead = true;
+        this.reachedGoal = true;
       } 
       if (this.health <= 0) {
         this.dead = true;

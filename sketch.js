@@ -13,6 +13,7 @@ let cash = 100;
 let level = 0;
 let wave = [];
 let spawnPoint;
+let harambeHeath = 5;
 
 function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
@@ -75,6 +76,12 @@ function draw() {
       walkers.splice(i, 1);
       cash += 10;
       console.log("enemy killed! cash: $" + cash);
+    }
+    if (walkers[i].reachedGoal) {
+      walkers.splice(i,1);
+      harambeHeath--;
+      console.log("enemy reached harambe!");
+      console.log("Harambe health: " + harambeHeath);
     }
     if (walkers.length > 0) {
       walkers[i].move();
