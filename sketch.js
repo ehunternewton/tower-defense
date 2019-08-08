@@ -7,6 +7,7 @@ let walkers = [];
 let bananas = [];
 let spritesheet;
 let bananasprite;
+let babysprite;
 let toPlace;
 let toSell;
 let cash = 100;
@@ -18,6 +19,7 @@ let harambeHeath = 5;
 function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
   bananasprite = loadImage("Sprites/BananaSprite.png");
+  bananasprite = loadImage("Sprites/BabyCrawl.png");
 }
 
 function setup() {
