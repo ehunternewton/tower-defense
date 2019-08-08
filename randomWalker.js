@@ -92,7 +92,9 @@ class RandomWalker {
     show() {
       stroke(51);
       fill(244);
-      ellipse(this.x, this.y, 32, 32);
+      //ellipse(this.x, this.y, 32, 32);
+      let img = babysprite.get(0,0,32,32);
+      image(img,-30,-35);
       fill(255,0,0);
       textSize(10);
       textAlign(CENTER);
