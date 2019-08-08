@@ -27,17 +27,20 @@ class Banana {
             stroke(0);
             translate(this.x, this.y);
             rotate(this.rotationAngle);
+            let dimW = 6 ;
+            let W = bananasprite.width/dimW;
+            let x = frameCount  % dimW * W;
             let img = bananasprite.get(0,0,65,75);
             img.resize(35,35)
             // image(img,-30,-35);
-            rect(-3,0,6,20);
+            /*rect(-3,0,6,20);
             ellipse(0, 0, 10, 30);
             fill(158, 122, 13);
             ellipse(2,2,2,2);
             ellipse(-2,-3,2,2);
             ellipse(2,-6,2,2);
             ellipse(-2,-6,2,2);
-            ellipse(0,9,2,2);
+            ellipse(0,9,2,2);*/
         pop();
     }
 }
