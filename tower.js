@@ -23,6 +23,7 @@ class Tower {
     //     this.follow = true;
     // }
 
+    //This will Display Monkey Sprite
     show() {
         push();
             translate(this.x, this.y);
