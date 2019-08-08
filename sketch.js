@@ -79,29 +79,13 @@ function draw() {
       }
     }
 
-<<<<<<< HEAD
-  for (let i = 0; i < walkers.length; i++) {
-    if (walkers[i].dead == true) {
-      walkers.splice(i, 1);
-      cash += 10;
-      console.log("enemy killed! cash: $" + cash);
-    }
-    else if (walkers[i].reachedGoal) {
-      walkers.splice(i,1);
-      harambeHeath--;
-      console.log("enemy reached harambe!");
-      console.log("Harambe health: " + harambeHeath);
-    }
-    if (walkers.length > 0) {
-      walkers[i].move();
-      walkers[i].show();
-=======
     for (let i = 0; i < walkers.length; i++) {
       if (walkers[i].dead == true) {
         walkers.splice(i, 1);
         cash += 10;
         console.log("enemy killed! cash: $" + cash);
-      } else if (walkers[i].reachedGoal) {
+      }
+      else if (walkers[i].reachedGoal) {
         walkers.splice(i,1);
         harambeHeath--;
         console.log("enemy reached harambe!");
@@ -111,14 +95,13 @@ function draw() {
         walkers[i].move();
         walkers[i].show();
       }
->>>>>>> 512ef264a30f541cdbd7c0d2350104ceddbef861
-    }
-  fill(255);
-  stroke(0);
-  textSize(23);
-  text("Cash: $"+cash,canvasWidth/2,canvasHeight);
-  text("Wave: " + level, canvasWidth-120, 19);
+    fill(255);
+    stroke(0);
+    textSize(23);
+    text("Cash: $"+cash,canvasWidth/2,canvasHeight);
+    text("Wave: " + level, canvasWidth-120, 19);
 
+    }
   }
 }
 
