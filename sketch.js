@@ -52,7 +52,12 @@ function draw() {
     text("press space to play",canvasWidth/2,canvasHeight/2);
   
   } else {
-    count++;
+    runGame();
+  }
+}
+
+function runGame() {
+  count++;
     if (count % delay == 0 && wave.length !=0){
       let walker = wave.pop();
       walkers.push(walker);
@@ -84,7 +89,8 @@ function draw() {
         walkers.splice(i, 1);
         cash += 10;
         console.log("enemy killed! cash: $" + cash);
-      } else if (walkers[i].reachedGoal) {
+      }
+      else if (walkers[i].reachedGoal) {
         walkers.splice(i,1);
         harambeHeath--;
         console.log("enemy reached harambe!");
@@ -94,14 +100,22 @@ function draw() {
         walkers[i].move();
         walkers[i].show();
       }
+<<<<<<< HEAD
     }
   fill(255);
   stroke(0);
   textSize(23);
   text("Cash: $"+cash,canvasWidth/2,canvasHeight);
   text("Wave: " + level, canvasWidth-120, 19);
+=======
+    fill(255);
+    stroke(0);
+    textSize(23);
+    text("Cash: $"+cash,canvasWidth/2,canvasHeight);
+    text("Wave: " + level, canvasWidth-120, 19);
+>>>>>>> f528b56c6a12c56d7b8a6fa04dcda93612fadb46
 
-  }
+    }
 }
 
 function pause() {
