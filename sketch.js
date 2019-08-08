@@ -52,7 +52,12 @@ function draw() {
     text("press space to play",canvasWidth/2,canvasHeight/2);
   
   } else {
-    count++;
+    runGame();
+  }
+}
+
+function runGame() {
+  count++;
     if (count % delay == 0 && wave.length !=0){
       let walker = wave.pop();
       walkers.push(walker);
@@ -102,7 +107,6 @@ function draw() {
     text("Wave: " + level, canvasWidth-120, 19);
 
     }
-  }
 }
 
 function pause() {
