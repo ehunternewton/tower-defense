@@ -25,7 +25,6 @@ class Tower {
 
     show() {
         push();
-        frameRate(180);
             translate(this.x, this.y);
             rotate(this.angle);
             fill(0,0,255);  
