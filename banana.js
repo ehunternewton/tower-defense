@@ -15,7 +15,7 @@ class Banana {
         this.x += dir.x * this.speed;
         this.y += dir.y * this.speed; 
         this.rotationAngle += PI/12;
-        if((abs(this.x - this.target.x) <= 3) && (abs(this.y - this.target.y) <= 3)) {
+        if((abs(this.x - this.target.x) <= this.speed) && (abs(this.y - this.target.y) <= this.speed)) {
             this.target.dealDamage(this.damage);
             this.dead = true;
         }
