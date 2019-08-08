@@ -21,11 +21,10 @@ function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
   bananasprite = loadImage("Sprites/BananaSprite.png");
   babysprite = loadImage("Sprites/BabyCrawl.png");
-  harambeImage = loadImage("Sprites/harambe.png")
 }
 
 function setup() {
-  frameRate(60);
+  frameRate(80);
   canvasWidth = 1280;
   canvasHeight = 720;
   let cnv = createCanvas(canvasWidth, canvasHeight);
@@ -50,11 +49,7 @@ function draw() {
     console.log("level: " + level);
   }
   if (paused) {
-    background(harambeImage);
-    fill(255);
-    stroke(0);
-    textSize(23);
-    text("press enter to play",canvasWidth/2,canvasHeight/2);
+    text("press space to play",canvasWidth/2,canvasHeight/2);
   
   } else {
     runGame();
@@ -105,14 +100,13 @@ function runGame() {
         walkers[i].move();
         walkers[i].show();
       }
-    }
-  fill(255);
-  stroke(0);
-  textSize(23);
-  text("Cash: $"+cash,canvasWidth/2,canvasHeight);
-  text("Wave: " + level, canvasWidth-120, 19);
+    fill(255);
+    stroke(0);
+    textSize(23);
+    text("Cash: $"+cash,canvasWidth/2,canvasHeight);
+    text("Wave: " + level, canvasWidth-120, 19);
 
-    
+    }
 }
 
 function pause() {
@@ -258,8 +252,8 @@ function keyPressed() {
           toPlace = false;
           toSell = false;
           break;
-      case 13:
-          // Enter
+      case 32:
+          // Space
           pause();
           break;
       case 49:
