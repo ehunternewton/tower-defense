@@ -1,8 +1,8 @@
 let count = 0;
 let delay = 150;
-let towers = [];
 const size = 40;
 playArea = new PlayArea(size/2);
+let towers = [];
 let walkers = [];
 let bananas = [];
 let spritesheet;
