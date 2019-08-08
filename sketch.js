@@ -100,22 +100,14 @@ function runGame() {
         walkers[i].move();
         walkers[i].show();
       }
-<<<<<<< HEAD
     }
   fill(255);
   stroke(0);
   textSize(23);
   text("Cash: $"+cash,canvasWidth/2,canvasHeight);
   text("Wave: " + level, canvasWidth-120, 19);
-=======
-    fill(255);
-    stroke(0);
-    textSize(23);
-    text("Cash: $"+cash,canvasWidth/2,canvasHeight);
-    text("Wave: " + level, canvasWidth-120, 19);
->>>>>>> f528b56c6a12c56d7b8a6fa04dcda93612fadb46
 
-    }
+    
 }
 
 function pause() {
