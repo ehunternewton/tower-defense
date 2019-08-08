@@ -4,7 +4,7 @@ class Banana {
         this.y = y;
         this.target = e;
         this.rotationAngle = 0;
-        this.speed = 6;
+        this.speed = 12;
         this.damage = damage;
         this.dead = false;
     }

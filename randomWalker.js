@@ -1,5 +1,5 @@
 class RandomWalker {
-    constructor(mapTile, mapTiles, health) {
+    constructor(mapTile, mapTiles, health, speed) {
       this.tile = mapTile;
       this.mapTiles = mapTiles;
       this.x = mapTile.x;
@@ -7,6 +7,7 @@ class RandomWalker {
       this.dead = false;
       this.reachedGoal = false;
       this.health = health;
+      this.speed = speed;
     }
 
     getLowestNeighbors() {
@@ -70,22 +71,21 @@ class RandomWalker {
     }
   
     move() {
-      let speed = 1;
-      if (this.tile.start == true && abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed) {
+      if (this.tile.start == true && abs(this.x - this.tile.x) <= this.speed && abs(this.y - this.tile.y) <= this.speed) {
         this.reachedGoal = true;
       } 
       if (this.health <= 0) {
         this.dead = true;
       }
       let dir = createVector(this.tile.x - this.x, this.tile.y - this.y).normalize();
-      if (abs(this.x - this.tile.x) <= speed && abs(this.y - this.tile.y) <= speed){
+      if (abs(this.x - this.tile.x) <= this.speed && abs(this.y - this.tile.y) <= this.speed){
         // let next = this.getLowestNeighbor();
         let neighbors = this.getLowestNeighbors();
         let next = neighbors[floor(random(neighbors.length))];
         this.tile = next;
       } else {
-        this.x += dir.x * speed;
-        this.y += dir.y * speed;
+        this.x += dir.x * this.speed;
+        this.y += dir.y * this.speed;
       }
     }
   
@@ -103,6 +103,7 @@ class RandomWalker {
       img.resize(64,64);
       image(img, this.x - 32, this.y - 32);
       fill(255,0,0);
+      stroke(255);
       textSize(10);
       textAlign(CENTER);
       text(this.health,this.x,this.y);

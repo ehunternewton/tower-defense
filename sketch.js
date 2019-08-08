@@ -15,7 +15,10 @@ let level = 0;
 let wave = [];
 let spawnPoint;
 let harambeHeath = 5;
-let paused = true;
+let startGame = false;
+let gameOver = false;
+let babySpeed = 1;
+
 
 function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
@@ -42,21 +45,57 @@ function setup() {
 
 
 function draw() {
-  background(51);
+  // background(51);
   if (wave.length == 0 && walkers.length == 0){
     level++;
-    loadWave(30 * level);
+    if(level % 3 == 0) {
+      babySpeed++;
+      delay *=.8;
+    }
+    loadWave(30 * level, babySpeed);
     console.log("level: " + level);
   }
-  if (paused) {
-    text("press space to play",canvasWidth/2,canvasHeight/2);
-  
-  } else {
+  if (startGame) {
     runGame();
+  
+  } else if (gameOver) {
+    fill(51,204,153);
+    textAlign(CENTER);
+    stroke(0);
+    textSize(46);
+    text("GAMEOVER",canvasWidth/2,canvasHeight/2-30);
+    textSize(23);
+    text("you made it to wave " + level +"!\npress 'r' to play again", canvasWidth/2,canvasHeight/2+60);
+  } else {
+    playArea.show();
+    fill(51,204,153);
+    textAlign(CENTER);
+    stroke(0);
+    textSize(46);
+    text("press enter to play",canvasWidth/2,canvasHeight/2-30);
+    textSize(23);
+    text("Instructions:\nstop the babies from reaching Harambe!\npress 't' then click a tile to build a tower,\npress 's' then click a tower to sell it", canvasWidth/2,canvasHeight/2+60);
+
   }
 }
 
+function resetGame(){
+  count = 0;
+  delay = 150;
+  towers = [];
+  walkers = [];
+  bananas = [];
+  cash = 100;
+  level = 0;
+  wave = [];
+  harambeHeath = 5;
+  startGame = false;
+  gameOver = false;
+  babySpeed = 1;
+}
+
 function runGame() {
+  background(51);
   count++;
     if (count % delay == 0 && wave.length !=0){
       let walker = wave.pop();
@@ -95,27 +134,32 @@ function runGame() {
         harambeHeath--;
         console.log("enemy reached harambe!");
         console.log("Harambe health: " + harambeHeath);
-      }
-      if (walkers.length > 0) {
-        walkers[i].move();
-        walkers[i].show();
-      }
+      } 
+    }
+    for (let i = 0; i < walkers.length; i++){
+      walkers[i].move();
+      walkers[i].show();
+    }
     fill(255);
     stroke(0);
     textSize(23);
     text("Cash: $"+cash,canvasWidth/2,canvasHeight);
     text("Wave: " + level, canvasWidth-120, 19);
 
+    if (harambeHeath <= 0) {
+      gameOver = true;
+      startGame = false;
     }
+    
 }
 
-function pause() {
-  paused = !paused;
+function start() {
+  startGame = true;
 }
 
-function loadWave(health) {
+function loadWave(health, babySpeed) {
   for (let i = 0; i < level * 3; i++) {
-    walker = new RandomWalker(spawnPoint, playArea.mapTiles, health);
+    walker = new RandomWalker(spawnPoint, playArea.mapTiles, health, babySpeed);
     wave.push(walker);
   }
 }
@@ -252,9 +296,9 @@ function keyPressed() {
           toPlace = false;
           toSell = false;
           break;
-      case 32:
-          // Space
-          pause();
+      case 13:
+          // Enter
+          start();
           break;
       case 49:
           // 1
@@ -311,7 +355,9 @@ function keyPressed() {
           break;
       case 82:
           // R
-          resetGame();
+          if (gameOver){
+            resetGame();
+          }
           break;
       case 83:
           // S
