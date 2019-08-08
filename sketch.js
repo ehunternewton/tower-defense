@@ -220,47 +220,6 @@ function sellTower(tile) {
   
 }
 
-// function placeTower(tile) {
-//   if (tile.highlight == false){
-//     tile.highlight = true;
-//     tile.reachable = false;
-//   } else if (tile.highlight == true) {
-//     tile.highlight = false;
-//     tile.reachable = true;
-//   }
-//   if (!tile.hasTower) {
-//     tower = new Tower(tile);
-//     towers.push(tower);
-//     tile.hasTower = true;
-//   } else {
-//     for (let i = 0; i < towers.length; i++) {
-//       if (towers[i].mapTile == tile) {
-//         towers.splice(i, 1);
-//         tile.hasTower = false;
-//       }
-//     }
-//   }
-//   playArea.createWalkMap();
-//   if(playArea.mapTiles[16].value == null) {
-//     towers.pop();
-//     tile.hasTower = false;
-//     tile.highlight = false;
-//     tile.reachable = true;
-//     playArea.createWalkMap();
-//   } else {
-//     for (let i = 0; i < walkers.length; i++) {
-//       if (walkers[i].tile.value === null) {
-//         towers.pop();
-//         tile.hasTower = false;
-//         tile.highlight = false;
-//         tile.reachable = true;
-//         playArea.createWalkMap();
-//         break;
-//       }
-//     }
-//   }
-// }
-
 function getTile(x, y) {
   for (let i = 0; i < playArea.mapTiles.length; i++) {
     let tile = playArea.mapTiles[i];
