@@ -15,6 +15,7 @@ let level = 0;
 let wave = [];
 let spawnPoint;
 let harambeHeath = 5;
+let pause = true;
 
 function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
@@ -40,6 +41,11 @@ function setup() {
 
 
 function draw() {
+  if (pause) {
+    frameRate(0);
+  } else {
+    frameRate(100);
+  }
   background(51);
   if (wave.length == 0 && walkers.length == 0){
     level++;
@@ -238,7 +244,7 @@ function keyPressed() {
           break;
       case 32:
           // Space
-          pause();
+          pause = !pause;
           break;
       case 49:
           // 1
