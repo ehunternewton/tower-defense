@@ -1,11 +1,11 @@
 class RandomWalker {
-    constructor(mapTile, mapTiles) {
+    constructor(mapTile, mapTiles, health) {
       this.tile = mapTile;
       this.mapTiles = mapTiles;
       this.x = mapTile.x;
       this.y = mapTile.y;
       this.dead = false;
-      this.health = 60;
+      this.health = health;
     }
 
     getLowestNeighbors() {

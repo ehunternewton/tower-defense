@@ -9,13 +9,14 @@ let spritesheet;
 let bananasprite;
 let toPlace;
 let toSell;
-let cash = 100; 
+let cash = 100;
+let level = 0;
+let wave = [];
+let spawnPoint;
 
 function preload() {
-  // spritedata = loadJSON("banana.json");
   spritesheet = loadImage("Sprites/MonkeySprite.png");
   bananasprite = loadImage("Sprites/BananaSprite.png");
-  // spritesheet = spritesheet.get(0,0,40,40);
 }
 
 function setup() {
@@ -28,23 +29,23 @@ function setup() {
   playArea.createMap(size);
   let start = playArea.mapTiles[170];
   start.start = true;
-  let spawnPoint = playArea.mapTiles[16]
+  spawnPoint = playArea.mapTiles[16]
   spawnPoint.spawnPoint = true;
   playArea.createWalkMap();
-  
-  for (let i = 0; i < 1; i++) {
-    walker = new RandomWalker(spawnPoint, playArea.mapTiles);
-    walkers.push(walker);
-  }
 }
 
 
 
 function draw() {
   background(51);
+  if (wave.length == 0 && walkers.length == 0){
+    level++;
+    loadWave(60 * level);
+    console.log("level: " + level);
+  }
   count++;
-  if (count % delay == 0){
-    let walker = new RandomWalker(playArea.mapTiles[16], playArea.mapTiles);
+  if (count % delay == 0 && wave.length !=0){
+    let walker = wave.pop();
     walkers.push(walker);
   }
   
@@ -84,7 +85,15 @@ fill(255);
 stroke(0);
 textSize(23);
 text("Cash: $"+cash,canvasWidth/2,canvasHeight);
+text("Wave: " + level, canvasWidth-120, 19);
 
+}
+
+function loadWave(health) {
+  for (let i = 0; i < level * 4; i++) {
+    walker = new RandomWalker(spawnPoint, playArea.mapTiles, health);
+    wave.push(walker);
+  }
 }
 
 function mouseClicked() {
@@ -115,6 +124,7 @@ function placeTower(tile) {
     tile.highlight = false;
     tile.reachable = true;
     playArea.createWalkMap();
+    cash += 25;
   } else {
     for (let i = 0; i < walkers.length; i++) {
       if (walkers[i].tile.value === null) {
@@ -123,6 +133,7 @@ function placeTower(tile) {
         tile.highlight = false;
         tile.reachable = true;
         playArea.createWalkMap();
+        cash += 25;
         break;
       }
     }
