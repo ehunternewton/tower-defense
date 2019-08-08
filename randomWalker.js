@@ -93,7 +93,13 @@ class RandomWalker {
       //stroke(51);
       //fill(244);
       //ellipse(this.x, this.y, 32, 32);
-      let img = babysprite.get(0,0,30,30);
+      let dimW = 6 ;
+      let dimH = 4 ;
+      frameRate(30);
+      let W = babysprite.width/dimW;
+      let H = babysprite.height/dimH;
+      let x = frameCount % dimW * W;
+      let img = babysprite.get(x,0,30,30);
       img.resize(64,64);
       image(img, this.x - 32, this.y - 32);
       fill(255,0,0);
