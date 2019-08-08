@@ -43,7 +43,7 @@ function draw() {
   background(51);
   if (wave.length == 0 && walkers.length == 0){
     level++;
-    loadWave(60 * level);
+    loadWave(30 * level);
     console.log("level: " + level);
   }
   count++;
@@ -78,8 +78,7 @@ function draw() {
       walkers.splice(i, 1);
       cash += 10;
       console.log("enemy killed! cash: $" + cash);
-    }
-    if (walkers[i].reachedGoal) {
+    } else if (walkers[i].reachedGoal) {
       walkers.splice(i,1);
       harambeHeath--;
       console.log("enemy reached harambe!");
@@ -99,7 +98,7 @@ text("Wave: " + level, canvasWidth-120, 19);
 }
 
 function loadWave(health) {
-  for (let i = 0; i < level * 4; i++) {
+  for (let i = 0; i < level * 3; i++) {
     walker = new RandomWalker(spawnPoint, playArea.mapTiles, health);
     wave.push(walker);
   }
