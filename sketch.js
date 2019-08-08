@@ -41,7 +41,17 @@ function setup() {
   playArea.createWalkMap();
   
 }
+function togglePause()
+{
+    if (!paused)
+    {
+        paused = true;
+    } else if (paused)
+    {
+       paused= false;
+    }
 
+}
 
 
 function draw() {
@@ -265,5 +275,9 @@ function keyPressed() {
             resetGame();
           }
           break;
+      case 80:
+          // P
+          togglePause();
+            break;
   }
 }
