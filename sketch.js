@@ -17,6 +17,7 @@ let spawnPoint;
 let harambeHeath = 5;
 let startGame = false;
 let gameOver = false;
+let paused = false;
 let babySpeed = 1;
 
 
@@ -65,7 +66,7 @@ function draw() {
     loadWave(30 * level, babySpeed);
     console.log("level: " + level);
   }
-  if (startGame) {
+  if (startGame && !paused) {
     runGame();
   
   } else if (gameOver) {
