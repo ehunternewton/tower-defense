@@ -21,6 +21,7 @@ function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
   bananasprite = loadImage("Sprites/BananaSprite.png");
   babysprite = loadImage("Sprites/BabyCrawl.png");
+  harambeImage = loadImage("Sprites/harambe.png")
 }
 
 function setup() {
@@ -49,7 +50,11 @@ function draw() {
     console.log("level: " + level);
   }
   if (paused) {
-    text("press space to play",canvasWidth/2,canvasHeight/2);
+    background(harambeImage);
+    fill(255);
+    stroke(0);
+    textSize(23);
+    text("press enter to play",canvasWidth/2,canvasHeight/2);
   
   } else {
     runGame();
@@ -253,8 +258,8 @@ function keyPressed() {
           toPlace = false;
           toSell = false;
           break;
-      case 32:
-          // Space
+      case 13:
+          // Enter
           pause();
           break;
       case 49:
