@@ -69,6 +69,13 @@ function draw() {
   if (startGame && !paused) {
     runGame();
   
+  } else if (paused){
+    playArea.show();
+    fill(51,204,153);
+    textAlign(CENTER);
+    stroke(0);
+    textSize(46);
+    text("paused\npress p to play",canvasWidth/2,canvasHeight/2-30);
   } else if (gameOver) {
     fill(51,204,153);
     textAlign(CENTER);
