@@ -20,7 +20,7 @@ let pause = true;
 function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
   bananasprite = loadImage("Sprites/BananaSprite.png");
-  
+  babysprite = loadImage("Sprites/BabyCrawl.png");
 }
 
 function setup() {
@@ -36,7 +36,6 @@ function setup() {
   spawnPoint = playArea.mapTiles[16]
   spawnPoint.spawnPoint = true;
   playArea.createWalkMap();
-  babysprite = loadImage("Sprites/BabyCrawl.png");
 }
 
 
@@ -85,12 +84,7 @@ function draw() {
       walkers.splice(i, 1);
       cash += 10;
       console.log("enemy killed! cash: $" + cash);
-<<<<<<< HEAD
-    }
-    else if (walkers[i].reachedGoal) {
-=======
     } else if (walkers[i].reachedGoal) {
->>>>>>> f9ec30d09d50b3eb913b48e6c3a387ec7540972b
       walkers.splice(i,1);
       harambeHeath--;
       console.log("enemy reached harambe!");
