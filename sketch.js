@@ -220,47 +220,6 @@ function sellTower(tile) {
   
 }
 
-// function placeTower(tile) {
-//   if (tile.highlight == false){
-//     tile.highlight = true;
-//     tile.reachable = false;
-//   } else if (tile.highlight == true) {
-//     tile.highlight = false;
-//     tile.reachable = true;
-//   }
-//   if (!tile.hasTower) {
-//     tower = new Tower(tile);
-//     towers.push(tower);
-//     tile.hasTower = true;
-//   } else {
-//     for (let i = 0; i < towers.length; i++) {
-//       if (towers[i].mapTile == tile) {
-//         towers.splice(i, 1);
-//         tile.hasTower = false;
-//       }
-//     }
-//   }
-//   playArea.createWalkMap();
-//   if(playArea.mapTiles[16].value == null) {
-//     towers.pop();
-//     tile.hasTower = false;
-//     tile.highlight = false;
-//     tile.reachable = true;
-//     playArea.createWalkMap();
-//   } else {
-//     for (let i = 0; i < walkers.length; i++) {
-//       if (walkers[i].tile.value === null) {
-//         towers.pop();
-//         tile.hasTower = false;
-//         tile.highlight = false;
-//         tile.reachable = true;
-//         playArea.createWalkMap();
-//         break;
-//       }
-//     }
-//   }
-// }
-
 function getTile(x, y) {
   for (let i = 0; i < playArea.mapTiles.length; i++) {
     let tile = playArea.mapTiles[i];
@@ -300,107 +259,10 @@ function keyPressed() {
           // Enter
           start();
           break;
-      case 49:
-          // 1
-          setPlace();
-          break;
-      case 50:
-          // 2
-          setPlace('laser');
-          break;
-      case 51:
-          // 3
-          setPlace('slow');
-          break;
-      case 52:
-          // 4
-          setPlace('sniper');
-          break;
-      case 53:
-          // 5
-          setPlace('rocket');
-          break;
-      case 54:
-          // 6
-          setPlace('bomb');
-          break;
-      case 55:
-          // 7
-          setPlace('tesla');
-          break;
-      case 70:
-          // F
-          showFPS = !showFPS;
-          break;
-      case 71:
-          // G
-          godMode = !godMode;
-          break;
-      case 72:
-          // H
-          healthBar = !healthBar;
-          break;
-      case 77:
-          // M
-          importMap(prompt('Input map string:'));
-          break;
-      case 80:
-          // P
-          showEffects = !showEffects;
-          if (!showEffects) systems = [];
-          break;
-      case 81:
-          // Q
-          stopFiring = !stopFiring;
-          break;
       case 82:
           // R
           if (gameOver){
             resetGame();
-          }
-          break;
-      case 83:
-          // S
-          if (selected) sell(selected);
-          break;
-      case 85:
-          // U
-          if (selected && selected.upgrades.length > 0) {
-              upgrade(selected.upgrades[0]);
-          }
-          break;
-      case 86:
-          // V
-          muteSounds = !muteSounds;
-          break;
-      case 87:
-          // W
-          skipToNext = !skipToNext;
-          break;
-      case 88:
-          // X
-          copyToClipboard(exportMap());
-          break;
-      case 90:
-          // Z
-          ts = zoomDefault;
-          resizeMax();
-          resetGame();
-          break;
-      case 219:
-          // Left bracket
-          if (ts > 16) {
-              ts -= tileZoom;
-              resizeMax();
-              resetGame();
-          }
-          break;
-      case 221:
-          // Right bracket
-          if (ts < 40) {
-              ts += tileZoom;
-              resizeMax();
-              resetGame();
           }
           break;
   }
