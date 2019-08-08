@@ -24,7 +24,7 @@ function preload() {
 }
 
 function setup() {
-  frameRate(80);
+  frameRate(120);
   canvasWidth = 1280;
   canvasHeight = 720;
   let cnv = createCanvas(canvasWidth, canvasHeight);

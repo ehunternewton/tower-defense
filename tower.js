@@ -25,19 +25,12 @@ class Tower {
 
     show() {
         push();
-            let dimW = 2 ;
-            let dimH = 2 ;
-            let W = spritesheet.width/dimW;
-            let H = spritesheet.height/dimH;
-            let x = frameCount  % dimW * W;
-            let y = frameCount / dimH % dimH * H;
-            frameRate(4);
             translate(this.x, this.y);
             rotate(this.angle);
             fill(0,0,255);  
             // ellipse(0, 0, 40, 40);
             // rect(0,-3,30,3);
-            let img = spritesheet.get(x,y,65,75);
+            let img = spritesheet.get(0,0,65,75);
             image(img,-30,-35);
         pop();
     }
