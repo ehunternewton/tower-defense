@@ -34,7 +34,7 @@ class PlayArea {
       }
 
       createWalkMap() {
-        console.log('creating walk map');
+        // console.log('creating walk map');
         let newWalkMap = [];
         for (let i = 0; i < playArea.mapTiles.length; i++) {
           playArea.mapTiles[i].value = null;
@@ -70,39 +70,6 @@ class PlayArea {
         }
         return visitable;
       }
-
-      // createWalkMap() {
-      //   console.log('creating walk map');
-      //   let newWalkMap = [];
-      //   for (let i = 0; i < playArea.mapTiles.length; i++) {
-      //     // playArea.mapTiles[i].value = null;
-      //     let tile = playArea.mapTiles[i];
-      //     tile.value = null;
-      //     newWalkMap.push(tile); 
-      //   }
-      //   // let base = playArea.mapTiles[0];
-      //   let base = newWalkMap[0];
-      //   for (let i = 0; i < newWalkMap.length; i++) {
-      //     if (newWalkMap[i].start == true) {
-      //       base = newWalkMap[i];
-      //     }
-      //   }
-      //   base.value = 0;
-      //   let frontier = [];
-      //   frontier.push(base);
-      //   while (frontier.length != 0) {
-      //     let current = frontier.shift();
-      //     for (let i = 0; i < current.neighbors.length; i++) {
-      //       console.log('made it!');
-      //       let next = current.neighbors[i];
-      //       if (next.value == null && next.reachable) {
-      //         next.value = current.value + 1;
-      //         frontier.push(next);
-      //       }
-      //     }
-      //   }
-      //   return newWalkMap; 
-      // }
       
 
       show() {

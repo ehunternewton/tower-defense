@@ -65,6 +65,12 @@ class MapTile {
         fill(204);
       }
       drawMapTile(this.x, this.y, this.w, this.h, this.value, this.gridPos[0], this.gridPos[1], this.cubeX, this.cubeY, this.cubeZ);
+      if(this.start){
+        fill(0);
+        textSize(20);
+        textAlign(CENTER);
+        text("Health:\n" + harambeHeath + "/5",this.x,this.y);
+      }
     }
   }
   
