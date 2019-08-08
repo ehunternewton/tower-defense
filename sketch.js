@@ -23,7 +23,7 @@ function preload() {
 }
 
 function setup() {
-  frameRate(100);
+  frameRate(60);
   canvasWidth = 1280;
   canvasHeight = 720;
   let cnv = createCanvas(canvasWidth, canvasHeight);
@@ -35,6 +35,7 @@ function setup() {
   spawnPoint = playArea.mapTiles[16]
   spawnPoint.spawnPoint = true;
   playArea.createWalkMap();
+  
 }
 
 
@@ -78,7 +79,8 @@ function draw() {
       walkers.splice(i, 1);
       cash += 10;
       console.log("enemy killed! cash: $" + cash);
-    } else if (walkers[i].reachedGoal) {
+    }
+    else if (walkers[i].reachedGoal) {
       walkers.splice(i,1);
       harambeHeath--;
       console.log("enemy reached harambe!");
