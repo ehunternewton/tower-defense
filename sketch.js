@@ -19,7 +19,7 @@ let harambeHeath = 5;
 function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
   bananasprite = loadImage("Sprites/BananaSprite.png");
-  bananasprite = loadImage("Sprites/BabyCrawl.png");
+  babysprite = loadImage("Sprites/BabyCrawl.png");
 }
 
 function setup() {
