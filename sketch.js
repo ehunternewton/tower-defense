@@ -50,7 +50,7 @@ function draw() {
     level++;
     if(level % 3 == 0) {
       babySpeed++;
-      delay *=.8;
+      delay = ceil(delay * .8);
     }
     loadWave(30 * level, babySpeed);
     console.log("level: " + level);
