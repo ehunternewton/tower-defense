@@ -15,6 +15,7 @@ let level = 0;
 let wave = [];
 let spawnPoint;
 let harambeHeath = 5;
+let paused = true;
 
 function preload() {
   spritesheet = loadImage("Sprites/MonkeySprite.png");
@@ -46,55 +47,64 @@ function draw() {
     loadWave(30 * level);
     console.log("level: " + level);
   }
-  count++;
-  if (count % delay == 0 && wave.length !=0){
-    let walker = wave.pop();
-    walkers.push(walker);
-  }
+  if (paused) {
+    text("press space to play",canvasWidth/2,canvasHeight/2);
   
-  playArea.mouseOver();
-  playArea.show();
-
-  
-  
-  for (let i = 0; i < towers.length; i++) {
-    towers[i].target(walkers);
-    towers[i].update();
-    towers[i].show()
-  }
-
-
-  for (let i = 0; i < bananas.length; i++) {
-    if (bananas[i].dead || bananas[i].target.dead) {
-      bananas.splice(i, 1);
-    } else {
-      bananas[i].update();
-      bananas[i].show();
+  } else {
+    count++;
+    if (count % delay == 0 && wave.length !=0){
+      let walker = wave.pop();
+      walkers.push(walker);
     }
-  }
+    
+    playArea.mouseOver();
+    playArea.show();
 
-  for (let i = 0; i < walkers.length; i++) {
-    if (walkers[i].dead == true) {
-      walkers.splice(i, 1);
-      cash += 10;
-      console.log("enemy killed! cash: $" + cash);
-    } else if (walkers[i].reachedGoal) {
-      walkers.splice(i,1);
-      harambeHeath--;
-      console.log("enemy reached harambe!");
-      console.log("Harambe health: " + harambeHeath);
+    
+    
+    for (let i = 0; i < towers.length; i++) {
+      towers[i].target(walkers);
+      towers[i].update();
+      towers[i].show()
     }
-    if (walkers.length > 0) {
-      walkers[i].move();
-      walkers[i].show();
-    }
-  }
-fill(255);
-stroke(0);
-textSize(23);
-text("Cash: $"+cash,canvasWidth/2,canvasHeight);
-text("Wave: " + level, canvasWidth-120, 19);
 
+
+    for (let i = 0; i < bananas.length; i++) {
+      if (bananas[i].dead || bananas[i].target.dead) {
+        bananas.splice(i, 1);
+      } else {
+        bananas[i].update();
+        bananas[i].show();
+      }
+    }
+
+    for (let i = 0; i < walkers.length; i++) {
+      if (walkers[i].dead == true) {
+        walkers.splice(i, 1);
+        cash += 10;
+        console.log("enemy killed! cash: $" + cash);
+      } else if (walkers[i].reachedGoal) {
+        walkers.splice(i,1);
+        harambeHeath--;
+        console.log("enemy reached harambe!");
+        console.log("Harambe health: " + harambeHeath);
+      }
+      if (walkers.length > 0) {
+        walkers[i].move();
+        walkers[i].show();
+      }
+    }
+  fill(255);
+  stroke(0);
+  textSize(23);
+  text("Cash: $"+cash,canvasWidth/2,canvasHeight);
+  text("Wave: " + level, canvasWidth-120, 19);
+
+  }
+}
+
+function pause() {
+  paused = !paused;
 }
 
 function loadWave(health) {
