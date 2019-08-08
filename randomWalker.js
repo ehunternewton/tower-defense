@@ -88,12 +88,20 @@ class RandomWalker {
         this.y += dir.y * speed;
       }
     }
-  
+    // This is the baby crawling sprite for enemy
     show() {
       //stroke(51);
       //fill(244);
-      //ellipse(this.x, this.y, 32, 32);
-      let img = babysprite.get(0,0,30,30);
+      //ellipse(this.x, this.y, 32, 32); // Drawing a circle of enemy
+      let dimw = 6 ;
+      let dimh = 4;
+
+      let W = babysprite.width/dimw;
+      let H = babysprite.height/dimh; 
+      let x = frameCount % dimw * W;
+      //let y = frameCount/dimh%dimh*H;
+      //frameRate(30);
+      let img = babysprite.get(x,0,30,30);
       img.resize(64,64);
       image(img, this.x - 32, this.y - 32);
       fill(255,0,0);
